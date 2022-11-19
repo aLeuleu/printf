@@ -6,30 +6,38 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:08:31 by alevra            #+#    #+#             */
-/*   Updated: 2022/11/19 20:52:21 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2022/11/19 21:19:13 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stdio.h>
-#include <stdarg.h>
 #include "ft_printf.h"
+#include <stdarg.h>
+#include <stdio.h>
 
 void	ft_putstr(char *str)
 {
 	ft_putstr_fd(str, 1);
 }
 
-char	*ft_strncpy(char *dest,const char *src, size_t n)
+void	ft_putnstr(char *s, size_t len)
+{
+	while (len-- > 0 && *s)
+	{
+		write(1, s++, 1);
+	}
+}
+
+char	*ft_strncpy(char *dest, const char *src, size_t n)
 {
 	size_t	i;
 
 	i = 0;
 	while (src[i] && i < n)
 	{
-		dest[i] =src[i];
+		dest[i] = src[i];
 		i++;
 	}
-	while ( i < n )
+	while (i < n)
 		dest[i++] = '\0';
 	return (dest);
 }
@@ -38,7 +46,7 @@ char	*ft_strnew(size_t size)
 {
 	char	*res;
 
-	res = (char *)malloc( sizeof(char) * size);
+	res = (char *)malloc(sizeof(char) * size);
 	if (!res)
 		return (NULL);
 	while (size > 0)
@@ -47,51 +55,62 @@ char	*ft_strnew(size_t size)
 }
 
 #include <string.h>
-char	*get_next_str(char *str_src, char c, char *type)
+int	get_next_str(char *str_src, char c, char *type)
 {
-	int count;
-	static int already_read = 0;
+	int			count;
+	static int	already_read;
+	char		*str;
+	int			size;
+
 	count = 0;
 	//char *s = ft_strchr(str,c)
-	char *str = ft_strchr(str_src,c);
+	str = ft_strchr(str_src, c);
 	if (!str || !*str)
-		return (NULL);
+	{
+		return (already_read + 1);
+	}
 	str += already_read;
-	int size = str - str_src;
+	size = str - str_src;
 	already_read = size;
 	*type = str_src[size + 1];
-	char *new_str = ft_strnew(size);
-	new_str = ft_strncpy(new_str, (const char *) str_src, size);
-
-/* 	if (type == 'd')
- */
-	return (new_str);
+	return (size);
 }
 
-void ft_printf(char *str, ...)
+void	ft_printf(char *str, ...)
 {
-	va_list args;
-	int i;
-	int num_args;
-	char type;
-	char *next_str = get_next_str(str,'%', &type);
-	
+	va_list	args;
+	int		i;
+	int		num_args;
+	char	type;
+	int		size;
+	int		x;
+	int		cumu_size;
+
+	cumu_size = 0;
+	size = get_next_str(str, '%', &type);
 	va_start(args, str);
-	while (next_str && next_str[0])
+	while (*(str + size) && size)
 	{
-		ft_putstr(next_str);
-		if (type == 'd')
+		if (!cumu_size)
+			ft_putnstr(str, size);
+		else
 		{
-			int x = va_arg(args, int);
+			ft_putnstr(str, cumu_size);
+		}
+		cumu_size += size;
+		if (type == 'd') 
+		{
+			x = va_arg(args, int);
 			ft_putstr(ft_itoa(x));
 		}
-		next_str = get_next_str(next_str,'%', &type);
+		size = get_next_str((str + cumu_size), '%', &type);
 	}
+	ft_putstr(str + cumu_size + 2);
 	va_end(args);
 }
 
-int main(int argc, char const *argv[])
-{ 
-	ft_printf("Bonjour, mon numero est le : %dhihihi", 4);
-	return 0;
+int	main(int argc, char const *argv[])
+{
+	ft_printf("Bonjour, mon numero est le : %d et le chiffre complementaire c'est %d hihihi", 4, 10);
+	return (0);
 }
