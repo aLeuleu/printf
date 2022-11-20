@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:08:31 by alevra            #+#    #+#             */
-/*   Updated: 2022/11/19 21:19:13 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2022/11/20 13:42:29 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,37 +78,25 @@ int	get_next_str(char *str_src, char c, char *type)
 
 void	ft_printf(char *str, ...)
 {
-	va_list	args;
-	int		i;
-	int		num_args;
-	char	type;
-	int		size;
-	int		x;
-	int		cumu_size;
-
-	cumu_size = 0;
-	size = get_next_str(str, '%', &type);
-	va_start(args, str);
-	while (*(str + size) && size)
+	va_list args;
+	int i;
+	va_start(args,str);
+	i= 0;
+	while ( str && str[i])
 	{
-		if (!cumu_size)
-			ft_putnstr(str, size);
-		else
+		while (str[i] && str[i] != '%' && str[i] != '/' )
+			ft_putchar_fd(str[i++],1);
+		if (str[i] == '%')
 		{
-			ft_putnstr(str, cumu_size);
+			i++;
+			int x = va_arg(args,int);
+			if (str[i] == 'd')
+				ft_putstr(ft_itoa(x));
+			i++;
 		}
-		cumu_size += size;
-		if (type == 'd') 
-		{
-			x = va_arg(args, int);
-			ft_putstr(ft_itoa(x));
-		}
-		size = get_next_str((str + cumu_size), '%', &type);
 	}
-	ft_putstr(str + cumu_size + 2);
 	va_end(args);
 }
-
 int	main(int argc, char const *argv[])
 {
 	ft_printf("Bonjour, mon numero est le : %d et le chiffre complementaire c'est %d hihihi", 4, 10);
