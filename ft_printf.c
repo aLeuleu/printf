@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:08:31 by alevra            #+#    #+#             */
-/*   Updated: 2022/11/20 13:42:29 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2022/11/21 20:36:18 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,50 +55,47 @@ char	*ft_strnew(size_t size)
 }
 
 #include <string.h>
-int	get_next_str(char *str_src, char c, char *type)
-{
-	int			count;
-	static int	already_read;
-	char		*str;
-	int			size;
 
-	count = 0;
-	//char *s = ft_strchr(str,c)
-	str = ft_strchr(str_src, c);
-	if (!str || !*str)
+int	switch_printf(char *format, va_list args)
+{
+	int x;
+
+	if (format[0] == 'd')
 	{
-		return (already_read + 1);
+		va_arg(args, int);
+		ft_putstr(ft_itoa);
 	}
-	str += already_read;
-	size = str - str_src;
-	already_read = size;
-	*type = str_src[size + 1];
-	return (size);
 }
 
 void	ft_printf(char *str, ...)
 {
-	va_list args;
-	int i;
-	va_start(args,str);
-	i= 0;
-	while ( str && str[i])
+	va_list			args;
+	int				i;
+	unsigned int	len;
+	//penser à proteger son write ! .. 
+	va_start(args, str);
+	i = 0;
+	if (!str)
+		return ;
+	while (str[i])
 	{
-		while (str[i] && str[i] != '%' && str[i] != '/' )
-			ft_putchar_fd(str[i++],1);
 		if (str[i] == '%')
-		{
-			i++;
-			int x = va_arg(args,int);
-			if (str[i] == 'd')
-				ft_putstr(ft_itoa(x));
-			i++;
-		}
-	}
+			switch_printf(str + i + 1, args);
+		else
+			ft_putchar_printf();
+		i++;
 	va_end(args);
 }
+
+#include "libft.h"
+
 int	main(int argc, char const *argv[])
 {
-	ft_printf("Bonjour, mon numero est le : %d et le chiffre complementaire c'est %d hihihi", 4, 10);
+	ft_printf("Numero : %d et puis %d hihihi", 4, 10);
+	ft_printf("");
+	//ft_printf("%");
+	//ft_printf(NULL);
+	//ft_printf("%d", 0);
+	//ft_printf(0);
 	return (0);
 }
