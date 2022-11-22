@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 12:47:32 by alevra            #+#    #+#             */
-/*   Updated: 2022/11/16 16:43:17 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2022/11/22 14:32:51 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_putstr_fd(const char *s, int fd);
 void	ft_putendl_fd(char const *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putchar(char c);
-void	ft_putstr(char *s);
+int		ft_putstr(char *s);
 void	ft_putendl(char *s);
 void	ft_putnbr(int n);
 

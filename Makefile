@@ -1,4 +1,4 @@
-NAME = libprintf.a
+NAME = libftprintf.a
 
 SRC =	ft_printf.c		\
 
@@ -15,8 +15,8 @@ all	: $(NAME)
 $(NAME): $(OBJ)
 	ar -rcs $(NAME) $(OBJ)
 
-bonus: $(BONUS_OBJ)
-	ar -rcs $(NAME) $(BONUS_OBJ)
+#bonus: $(BONUS_OBJ)
+#	ar -rcs $(NAME) $(BONUS_OBJ)
 
 %.o : %.c  ${HEADER} Makefile
 	gcc -c -Wall -Wextra -Werror $<
@@ -29,7 +29,7 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean
-	${MAKE} all
+	make all
 
 
 .PHONY: bonus all clean fclean re

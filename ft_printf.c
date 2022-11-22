@@ -6,96 +6,79 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:08:31 by alevra            #+#    #+#             */
-/*   Updated: 2022/11/21 20:36:18 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2022/11/22 19:43:57 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdarg.h>
-#include <stdio.h>
 
-void	ft_putstr(char *str)
+#include "ft_putnbr_base.c"
+#include "ft_put_u_nbr.c"
+#include "ft_itoa_printf.c"
+#include "ft_putchar.c"
+#include "ft_putstr.c"
+
+static int	ft_putchar_printf(char c)
 {
-	ft_putstr_fd(str, 1);
+	ft_putchar(c);
+	return (1);
 }
 
-void	ft_putnstr(char *s, size_t len)
+static int	switch_printf(char format, va_list args)
 {
-	while (len-- > 0 && *s)
+	if (format == 'c')
+		return (ft_putchar_printf((char)va_arg(args, int)), 1);
+	else if (format == 's')
+		return (ft_putstr(va_arg(args, char *)));
+	else if (format == 'p')
 	{
-		write(1, s++, 1);
+		ft_putstr("0x");
+		return (ft_putnbr_base(va_arg(args, unsigned long), "0123456789abcdef") + 2);
 	}
+	else if (format == 'd' || format == 'i')
+		return (ft_itoa_printf(va_arg(args, int)));
+	else if (format == 'u')
+		return (ft_put_u_nbr(va_arg(args, unsigned int)));
+	else if (format == 'x')
+		return (ft_putnbr_base(va_arg(args, unsigned long), "0123456789abcdef"));
+	else if (format == 'X')
+		return (ft_putnbr_base(va_arg(args, unsigned long), "0123456789ABCDEF"));
+	else if (format == '%')
+		return (ft_putchar_printf('%'));
+	return (0);
 }
 
-char	*ft_strncpy(char *dest, const char *src, size_t n)
+int	ft_printf(const char *str, ...)
 {
-	size_t	i;
-
-	i = 0;
-	while (src[i] && i < n)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	while (i < n)
-		dest[i++] = '\0';
-	return (dest);
-}
-
-char	*ft_strnew(size_t size)
-{
-	char	*res;
-
-	res = (char *)malloc(sizeof(char) * size);
-	if (!res)
-		return (NULL);
-	while (size > 0)
-		res[size--] = 0;
-	return (res);
-}
-
-#include <string.h>
-
-int	switch_printf(char *format, va_list args)
-{
-	int x;
-
-	if (format[0] == 'd')
-	{
-		va_arg(args, int);
-		ft_putstr(ft_itoa);
-	}
-}
-
-void	ft_printf(char *str, ...)
-{
-	va_list			args;
-	int				i;
-	unsigned int	len;
+	va_list	args;
+	int		i;
+	int		len;
 	//penser à proteger son write ! .. 
 	va_start(args, str);
 	i = 0;
-	if (!str)
-		return ;
+	len = 0;
 	while (str[i])
 	{
-		if (str[i] == '%')
-			switch_printf(str + i + 1, args);
-		else
-			ft_putchar_printf();
+		if (str[i] == '%' && str[i + 1])
+		{
+			len += switch_printf(str[i + 1], args);
+			i++;
+		}
+		else if (!(str[i] == '%' && !str[i + 1] ))
+			len += ft_putchar_printf(str[i]);
 		i++;
+	}
 	va_end(args);
+	return (len);
 }
-
-#include "libft.h"
-
-int	main(int argc, char const *argv[])
+int main(int argc, char const *argv[])
 {
-	ft_printf("Numero : %d et puis %d hihihi", 4, 10);
-	ft_printf("");
-	//ft_printf("%");
-	//ft_printf(NULL);
-	//ft_printf("%d", 0);
-	//ft_printf(0);
-	return (0);
+	ft_printf("5yup+%X%p\f^%xGV%p<.ZAFV7.%uu<QU\tm3%c:lV9D%X@lY-kYl#", -1188388770, -1917131295, -385321198, -994562201, (void *)564382060602529785, -1443482557, (void 
+*)7276484769049329218, -305677317, 1853607490, 874319342);
+printf("\n");
+	printf("5yup+%X%p\f^%xGV%p<.ZAFV7.%uu<QU\tm3%c:lV9D%X@lY-kYl#", -1188388770, -1917131295, -385321198, -994562201, (void *)564382060602529785, -1443482557, (void 
+*)7276484769049329218, -305677317, 1853607490, 874319342);
+printf("\n");
+	return 0;
 }
