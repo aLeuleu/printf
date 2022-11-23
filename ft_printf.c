@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:08:31 by alevra            #+#    #+#             */
-/*   Updated: 2022/11/22 19:43:57 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2022/11/23 16:45:39 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	ft_printf(const char *str, ...)
 	va_end(args);
 	return (len);
 }
-int main(int argc, char const *argv[])
+/* int main(int argc, char const *argv[])
 {
 	ft_printf("5yup+%X%p\f^%xGV%p<.ZAFV7.%uu<QU\tm3%c:lV9D%X@lY-kYl#", -1188388770, -1917131295, -385321198, -994562201, (void *)564382060602529785, -1443482557, (void 
 *)7276484769049329218, -305677317, 1853607490, 874319342);
@@ -82,3 +82,4 @@ printf("\n");
 printf("\n");
 	return 0;
 }
+ */
