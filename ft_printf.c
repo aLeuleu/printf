@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:08:31 by alevra            #+#    #+#             */
-/*   Updated: 2022/11/24 16:56:18 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2022/11/24 20:52:34 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,3 +70,9 @@ int	ft_printf(const char *str, ...)
 	va_end(args);
 	return (len);
 }
+
+/*
+Attention :  Si le projet autorise votre libft, vous devez copier ses sources et son Makefile
+associé dans un dossier libft contenu à la racine. Le Makefile de votre projet doit
+compiler la librairie à l’aide de son Makefile, puis compiler le projet.
+*/
