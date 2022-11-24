@@ -6,13 +6,11 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:53:02 by alevra            #+#    #+#             */
-/*   Updated: 2022/11/22 17:52:37 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2022/11/24 16:43:05 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-#include "ft_strlen.c"
+#include "ft_printf.h"
 
 static unsigned int		base_is_valid(char *base);
 static int				char_is_plus_or_minus(char c);
@@ -78,4 +76,3 @@ static int	char_is_plus_or_minus(char c)
 	else
 		return (0);
 }
-

@@ -6,11 +6,11 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 11:58:35 by alevra            #+#    #+#             */
-/*   Updated: 2022/11/03 11:58:37 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2022/11/24 16:14:59 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 void	ft_putnbr(int n)
 {

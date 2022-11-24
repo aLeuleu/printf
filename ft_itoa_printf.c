@@ -6,11 +6,11 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:53:28 by alevra            #+#    #+#             */
-/*   Updated: 2022/11/22 18:45:24 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2022/11/24 16:44:46 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 static unsigned int	ft_abs(int n)
 {
@@ -40,7 +40,7 @@ static size_t	ft_nb_size(unsigned int n)
 
 int	ft_itoa_printf(int n)
 {
-	int			i;
+	int				i;
 	int				size;
 	char			*res;
 	unsigned int	abs_n;

@@ -1,6 +1,13 @@
 NAME = libftprintf.a
 
 SRC =	ft_printf.c		\
+		ft_itoa_printf.c		\
+		ft_putchar.c		\
+		ft_putnbr.c		\
+		ft_putstr.c		\
+		ft_put_u_nbr.c		\
+		ft_strlen.c		\
+		ft_putnbr_base.c		\
 
 HEADER = ft_printf.h
 
@@ -15,9 +22,6 @@ all	: $(NAME)
 $(NAME): $(OBJ)
 	ar -rcs $(NAME) $(OBJ)
 
-#bonus: $(BONUS_OBJ)
-#	ar -rcs $(NAME) $(BONUS_OBJ)
-
 %.o : %.c  ${HEADER} Makefile
 	gcc -c -Wall -Wextra -Werror $<
 
@@ -30,6 +34,5 @@ fclean: clean
 
 re: fclean
 	make all
-
 
 .PHONY: bonus all clean fclean re
