@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:08:31 by alevra            #+#    #+#             */
-/*   Updated: 2022/11/25 13:54:53 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2022/11/25 13:57:00 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	ft_putchar_printf(char c)
 //ft_strlen a optimiser avec un seul appel systeme
 
 //putnbr base : si unsigned alors pas besoin de gerer les cas negatifs
-
+//faire une macro de pre processeur pour mettre les bases
 static int	switch_printf(char format, va_list args)
 {
 	if (format == 'c')
