@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:08:31 by alevra            #+#    #+#             */
-/*   Updated: 2022/11/25 11:26:59 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2022/11/25 13:54:53 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,14 @@ static int	ft_putchar_printf(char c)
 	return (1);
 }
 
+//ft_strlen a optimiser avec un seul appel systeme
+
+//putnbr base : si unsigned alors pas besoin de gerer les cas negatifs
+
 static int	switch_printf(char format, va_list args)
 {
 	if (format == 'c')
-		return (ft_putchar_printf((char)va_arg(args, int)), 1);
+		return (ft_putchar_printf((char)va_arg(args, int)), 1); // pb ici
 	else if (format == 's')
 		return (ft_putstr(va_arg(args, char *)));
 	else if (format == 'p')
@@ -57,7 +61,7 @@ int	ft_printf(const char *str, ...)
 	while (str[i])
 	{
 		if (str[i] == '%' && str[i + 1]
-			&& ft_strchr("cspdiuxX%", (int)str[i + 1]))
+			&& ft_strchr("cspdiuxX%", (int)str[i + 1])) // on peut surement virer le % ici
 		{
 			len += switch_printf(str[i + 1], args);
 			i++;
