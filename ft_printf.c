@@ -6,12 +6,11 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:08:31 by alevra            #+#    #+#             */
-/*   Updated: 2022/11/24 20:52:34 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2022/11/25 11:26:59 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdarg.h>
 
 static int	ft_putchar_printf(char c)
 {
@@ -28,7 +27,7 @@ static int	switch_printf(char format, va_list args)
 	else if (format == 'p')
 	{
 		return (ft_putstr("0x")
-			+ ft_putnbr_base(va_arg(args, unsigned long), "0123456789abcdef"));
+			+ ft_putnbr_base(va_arg(args, unsigned long), base_hexa));
 	}
 	else if (format == 'd' || format == 'i')
 		return (ft_itoa_printf(va_arg(args, int)));
@@ -36,10 +35,9 @@ static int	switch_printf(char format, va_list args)
 		return (ft_put_u_nbr(va_arg(args, unsigned int)));
 	else if (format == 'x')
 		return (ft_putnbr_base(va_arg(args, unsigned long),
-				"0123456789abcdef"));
+				base_hexa));
 	else if (format == 'X')
-		return (ft_putnbr_base(va_arg(args, unsigned long),
-				"0123456789ABCDEF"));
+		return (ft_putnbr_base(va_arg(args, unsigned long), base_hexa_maj));
 	else if (format == '%')
 		return (ft_putchar_printf('%'));
 	return (0);
@@ -52,27 +50,22 @@ int	ft_printf(const char *str, ...)
 	int		len;
 
 	if (write(1, 0, 0) < 0)
-		return (0);
+		return (-1);
 	va_start(args, str);
 	i = 0;
 	len = 0;
 	while (str[i])
 	{
-		if (str[i] == '%' && str[i + 1])
+		if (str[i] == '%' && str[i + 1]
+			&& ft_strchr("cspdiuxX%", (int)str[i + 1]))
 		{
 			len += switch_printf(str[i + 1], args);
 			i++;
 		}
-		else if (!(str[i] == '%' && !str[i + 1]))
+		else if (str[i] != '%')
 			len += ft_putchar_printf(str[i]);
 		i++;
 	}
 	va_end(args);
 	return (len);
 }
-
-/*
-Attention :  Si le projet autorise votre libft, vous devez copier ses sources et son Makefile
-associé dans un dossier libft contenu à la racine. Le Makefile de votre projet doit
-compiler la librairie à l’aide de son Makefile, puis compiler le projet.
-*/
