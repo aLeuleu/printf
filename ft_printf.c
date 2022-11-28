@@ -6,26 +6,16 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:08:31 by alevra            #+#    #+#             */
-/*   Updated: 2022/11/25 13:57:00 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2022/11/28 14:49:36 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_putchar_printf(char c)
-{
-	ft_putchar(c);
-	return (1);
-}
-
-//ft_strlen a optimiser avec un seul appel systeme
-
-//putnbr base : si unsigned alors pas besoin de gerer les cas negatifs
-//faire une macro de pre processeur pour mettre les bases
 static int	switch_printf(char format, va_list args)
 {
 	if (format == 'c')
-		return (ft_putchar_printf((char)va_arg(args, int)), 1); // pb ici
+		return (ft_putchar_printf((char)va_arg(args, int)), 1);
 	else if (format == 's')
 		return (ft_putstr(va_arg(args, char *)));
 	else if (format == 'p')
@@ -61,12 +51,12 @@ int	ft_printf(const char *str, ...)
 	while (str[i])
 	{
 		if (str[i] == '%' && str[i + 1]
-			&& ft_strchr("cspdiuxX%", (int)str[i + 1])) // on peut surement virer le % ici
+			&& ft_strchr("cspdiuxX", (int)str[i + 1]))
 		{
 			len += switch_printf(str[i + 1], args);
 			i++;
 		}
-		else if (str[i] != '%')
+		else
 			len += ft_putchar_printf(str[i]);
 		i++;
 	}
