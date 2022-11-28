@@ -6,19 +6,19 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:08:31 by alevra            #+#    #+#             */
-/*   Updated: 2022/11/25 12:00:27 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2022/11/28 14:56:03 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# ifndef base_hexa
-#  define base_hexa "0123456789abcdef"
+# ifndef BASE_HEXA
+#  define BASE_HEXA "0123456789abcdef"
 # endif
 
-# ifndef base_hexa_maj
-#  define base_hexa_maj "0123456789ABCDEF"
+# ifndef BASE_HEXA_MAJ
+#  define BASE_HEXA_MAJ "0123456789ABCDEF"
 # endif
 
 # include <stdarg.h>

@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:08:31 by alevra            #+#    #+#             */
-/*   Updated: 2022/11/28 14:49:36 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2022/11/28 14:57:44 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static int	switch_printf(char format, va_list args)
 {
 	if (format == 'c')
-		return (ft_putchar_printf((char)va_arg(args, int)), 1);
+		return (ft_putchar((char)va_arg(args, int)), 1);
 	else if (format == 's')
 		return (ft_putstr(va_arg(args, char *)));
 	else if (format == 'p')
 	{
 		return (ft_putstr("0x")
-			+ ft_putnbr_base(va_arg(args, unsigned long), base_hexa));
+			+ ft_putnbr_base(va_arg(args, unsigned long), BASE_HEXA));
 	}
 	else if (format == 'd' || format == 'i')
 		return (ft_itoa_printf(va_arg(args, int)));
@@ -29,11 +29,11 @@ static int	switch_printf(char format, va_list args)
 		return (ft_put_u_nbr(va_arg(args, unsigned int)));
 	else if (format == 'x')
 		return (ft_putnbr_base(va_arg(args, unsigned long),
-				base_hexa));
+				BASE_HEXA));
 	else if (format == 'X')
-		return (ft_putnbr_base(va_arg(args, unsigned long), base_hexa_maj));
+		return (ft_putnbr_base(va_arg(args, unsigned long), BASE_HEXA_MAJ));
 	else if (format == '%')
-		return (ft_putchar_printf('%'));
+		return (ft_putchar('%'), 1);
 	return (0);
 }
 
@@ -57,9 +57,11 @@ int	ft_printf(const char *str, ...)
 			i++;
 		}
 		else
-			len += ft_putchar_printf(str[i]);
+		{
+			ft_putchar(str[i]);
+			len++;
+		}
 		i++;
 	}
-	va_end(args);
-	return (len);
+	return (va_end(args), len);
 }
