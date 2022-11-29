@@ -13,10 +13,10 @@ int main(int argc, char const *argv[])
 {
 
 	printf("ft_printf :\n");
-	int a = ft_printf("%");
+	int a = ft_printf("%w");
 	printf("\na : %d \n", a);
 	printf("printf :\n");
-	a = printf("%");
+	a = printf("%w");
 	printf("\na : %d \n", a);
 	return 0;
 }
