@@ -8,15 +8,16 @@
 #include "libft/ft_putstr.c"
 #include "libft/ft_strlen.c"
 #include "libft/ft_strchr.c"
+#include "libft/ft_putnbr.c"
 
 int main(int argc, char const *argv[])
 {
 
 	printf("ft_printf :\n");
-	int a = ft_printf("%w");
+	int a = ft_printf("%d", -12);
 	printf("\na : %d \n", a);
 	printf("printf :\n");
-	a = printf("%w");
+	a = printf("%d", -12);
 	printf("\na : %d \n", a);
 	return 0;
 }
