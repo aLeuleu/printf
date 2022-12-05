@@ -4,12 +4,11 @@
 
 int main(int argc, char const *argv[])
 {
-
-	printf("ft_printf :\n");
-	int a = ft_printf("%x", LONG_MAX);
-	printf("\na : %d \n", a);
 	printf("printf :\n");
-	a = printf("%lx", LONG_MAX);
-	printf("\na : %d \n", a);
-	return 0;
+	int a = printf("%p\n", "");
+	printf("a : %d \n", a);
+	printf("ft_printf :\n");
+	a = ft_printf("%p\n", "");
+	printf("a : %d \n", a);
+	return (0);
 }

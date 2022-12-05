@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 16:08:31 by alevra            #+#    #+#             */
-/*   Updated: 2022/11/30 19:49:22 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2022/12/05 22:16:40 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # ifndef BASE_HEXA
 #  define BASE_HEXA "0123456789abcdef"
+# endif
+
+# ifndef BASE_DEC
+#  define BASE_DEC "0123456789"
 # endif
 
 # ifndef BASE_HEXA_MAJ
