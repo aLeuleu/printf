@@ -6,12 +6,15 @@ HEADER = ft_printf.h
 
 OBJ = $(SRC:.c=.o)
 
-all	: libft/libft.a $(NAME)
+all	: makelibft $(NAME)
 
-$(NAME): libft/libft.a $(OBJ) 
+$(NAME): libft/libft.a $(OBJ)
 	cp libft/libft.a .
 	mv libft.a $(NAME)
 	ar -rcs $(NAME) $(OBJ)
+
+makelibft :
+	make all -C libft
 
 libft/libft.a :
 	make all -C libft
