@@ -14,7 +14,7 @@ $(NAME): libft/libft.a $(OBJ)
 	ar -rcs $(NAME) $(OBJ)
 
 libft/libft.a :
-	make -C libft
+	make all -C libft
 
 %.o : %.c  $(HEADER)
 	gcc -c -Wall -Wextra -Werror $<
